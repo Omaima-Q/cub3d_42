@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void	print_content(t_resources *c)
+static void	print_content(t_resources *c)    // static means we are using this function only here , and it's only used by the int main
 {
 	int	i;
 	int	j;
@@ -45,15 +45,15 @@ int	main(int argc, char *argv[])
 	t_game data;
 	t_resources content;
 
-	errno = 0;	//I reset errno to 0 to ensure clean error handling throughout the program
-	init_content(&content);     //This initializes the content structure with default/null values to avoid undefined behavior
+	errno = 0;									//I reset errno to 0 to ensure clean error handling throughout the program
+	init_content(&content);     				//This initializes the content structure with default/null values to avoid undefined behavior
 	if (parse(argc, argv, &content) <= 0)
 		return (EXIT_FAILURE);
-	print_content(&content);	//This prints the parsed data - used for debugging during development
-	init(&data, &content);       //Here I initialize the MLX connection, create the window, set up the player's starting position and direction based on the map, and prepare everything for rendering
-	render(&data);
-	mlx_key_hook(data.win, key_handler, &data);
-	mlx_hook(data.win, 17, 0, close_window, &data);
-	mlx_loop(data.mlx);
+	print_content(&content);					// This prints the parsed data - used for debugging during development
+	init(&data, &content);      				// Here I initialize the MLX connection, create the window, set up the player's starting position and direction based on the map, and prepare everything for rendering
+	render(&data);              								// this draws the initial frame 
+	mlx_key_hook(data.win, key_handler, &data);    				// Register keyboard input handler
+	mlx_hook(data.win, 17, 0, close_window, &data);				// handle window close button
+	mlx_loop(data.mlx);											// Start MLX event loop - keeps window open and responsive
 	return (EXIT_SUCCESS);
 }
