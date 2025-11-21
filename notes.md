@@ -1,4 +1,4 @@
-### Common X11 event codes you might use:
+### Common X11 event codes you might use (for mlx hook):
 
 <!-- Event codes -->
   2  = KeyPress          // Key is pressed down  
