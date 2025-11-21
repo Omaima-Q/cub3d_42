@@ -2,13 +2,13 @@
 c// Event codes  
 
 
-2  = KeyPress          // Key is pressed down  
+  2  = KeyPress          // Key is pressed down  
 
-3  = KeyRelease        // Key is released  
+  3  = KeyRelease        // Key is released  
 
-4  = ButtonPress       // Mouse button pressed  
+  4  = ButtonPress       // Mouse button pressed  
 
-5  = ButtonRelease     // Mouse button released  
+  5  = ButtonRelease     // Mouse button released  
 
 6  = MotionNotify      // Mouse moved  
 
