@@ -1,7 +1,6 @@
 ### Common X11 event codes you might use:
-c// Event codes  
 
-
+<!-- Event codes -->
   2  = KeyPress          // Key is pressed down  
 
   3  = KeyRelease        // Key is released  
