@@ -40,8 +40,14 @@ long int	get_time(t_game *d)
 {
 	struct timeval	tv;
 
+	// Get current time from system
 	if (gettimeofday(&tv, NULL) == -1)
 		error_msg("gettimeofday() failed in get_time()\n", d);
+
+	// Convert to milliseconds:
+    // tv_sec is in seconds, multiply by 1000
+    // tv_usec is in microseconds, divide by 1000
+    // Result: total milliseconds since Unix epoch
 	return ((tv.tv_sec * (long int)1000) + (tv.tv_usec / 1000));
 }
 
