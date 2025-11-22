@@ -16,29 +16,38 @@ void	run_dda(t_game *d)
 {
 	int	hit;
 
-	hit = 0;
+	hit = 0;		// No wall hit yet
+
+	// Keep stepping through grid until we hit a wall
 	while (hit == 0)
 	{
+		// Check which gridline is closer: X or Y
 		if (d->side_dist_x < d->side_dist_y)
 		{
-			d->side_dist_x += d->delta_dist_x;
-			d->map_x += d->step_x;
-			d->side = 0;
+			// X gridline is closer, step in X direction
+			d->side_dist_x += d->delta_dist_x;		// Add distance to next X line
+			d->map_x += d->step_x;					// Move to next grid square
+			d->side = 0;							// Remember we hit an X-side (vertical wall)
 		}
 		else
 		{
-			d->side_dist_y += d->delta_dist_y;
-			d->map_y += d->step_y;
-			d->side = 1;
+			// Y gridline is closer, step in Y direction
+			d->side_dist_y += d->delta_dist_y;			// Add distance to next Y line
+			d->map_y += d->step_y;						// Move to next grid square
+			d->side = 1;								// Remember we hit a Y-side (horizontal wall)
 		}
+		
+		// Check if current grid square contains a wall
+        // '1' (ASCII 49) represents a wall in the map
 		if (d->world_map[d->map_x][d->map_y] == 49)
-			hit = 1;
+			hit = 1;			// Wall found, stop stepping
 	}
 }
 
+
 long int	get_time(t_game *d)
 {
-	struct timeval	tv;
+	struct timeval	tv;		// Holds seconds and microseconds
 
 	// Get current time from system
 	if (gettimeofday(&tv, NULL) == -1)
