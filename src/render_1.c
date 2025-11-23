@@ -95,6 +95,7 @@ static void	calc_start_end(t_game *d)
 void	render(t_game *d)
 {
 	int	x;
+	
 	// create the image buffer we'll draw into
 	if (!d->img)
 	{
