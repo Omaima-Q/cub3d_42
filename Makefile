@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-# *********************************INITIALIZE********************************* #
+# INITIALIZE #
 
-NAME = cub3d
+NAME = cub3D
 
 SRC_DIR = src
 
@@ -45,7 +45,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(LIBMLX_DIR) -L$(LIBMLX_DIR) -lmlx -framework OpenGL -framework AppKit -lz
 
-# ************************************RULES*********************************** #
+# RULES #
 
 $(NAME): $(addprefix $(LIBMLX_DIR)/,$(LIBMLX_NAME)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(INCLUDE_DIR)/,$(INCLUDE_FILES))
 	$(CC) $(CFLAGS) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) -o $(NAME)
