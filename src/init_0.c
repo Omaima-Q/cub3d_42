@@ -35,6 +35,13 @@ static void	init_player_position(t_game *d)
 	}
 }
 
+// find 'N/E/S/W' in map, set coordinates
+// Loop through every cell of the map
+// If cell contains 'N', 'E', 'S', or 'W':
+// Set player position to center of that cell (+0.5)
+// Stop searching
+// The +0.5 centers the player in the tile (not at the corner).
+
 static void	init_player_orientation(t_game *d)
 {
 	char	c;
@@ -42,7 +49,7 @@ static void	init_player_orientation(t_game *d)
 	c = d->world_map[(int)d->pos_x][(int)d->pos_y];
 	if (c == 'N')
 	{
-		d->dir_x = -1.0;
+		d->dir_x = -1.0;		// Already facing North, no rotation needed
 		d->dir_y = 0.0;
 	}
 	else if (c == 'E')
@@ -52,6 +59,15 @@ static void	init_player_orientation(t_game *d)
 	else if (c == 'W')
 		rotate_right(d, 3 * M_PI_2);
 }
+
+// Once position is found, this sets the direction vector based on the letter:
+// Letter Meaning dir_xdir_y 
+// N North (up)-1.00.0 
+// E East (right)rotates 90°
+// S South (down)rotates 180°
+// W West (left)rotates 270°
+// -1 for North because In the 2D array, row 0 is at the top.
+// Moving "up" means decreasing the row index, so direction is negative on the X axis.
 
 void	init_content(t_resources *content)
 {
