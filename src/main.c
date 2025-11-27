@@ -47,6 +47,8 @@ int	main(int argc, char *argv[])
 
 	errno = 0;									//I reset errno to 0 to ensure clean error handling throughout the program
 	init_content(&content);     				//This initializes the content structure with default/null values to avoid undefined behavior
+
+	// Parse and validate the .cub file - returns 0 or negative on error
 	if (parse(argc, argv, &content) <= 0)
 		return (EXIT_FAILURE);
 	print_content(&content);					// This prints the parsed data - used for debugging during development
