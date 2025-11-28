@@ -34,6 +34,8 @@ void	get_move_rot_speeds(t_game *d)
 	d->rot_speed = d->frame_time * 12.0;
 }
 
+// Make movement same speed on all computers
+
 void	plot(int x, int y, t_game *d, int color)
 {
 	int	pix;
@@ -57,6 +59,8 @@ void	plot(int x, int y, t_game *d, int color)
 		}
 	}
 }
+
+// Draw one pixel to screen buffer
 
 void	draw_floor_and_ceiling(t_game *d)
 {
@@ -91,6 +95,8 @@ static void	calc_start_end(t_game *d)
 	if (d->draw_end >= d->screen_height)
 		d->draw_end = d->screen_height - 1;
 }
+
+// Calculate wall strip height and position
 
 void	render(t_game *d)
 {
