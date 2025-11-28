@@ -88,6 +88,12 @@ void	init_content(t_resources *content)
 	content->col_qty = 0;
 }
 
+// This just creates empty containers before parsing the .cub file:
+
+// Allocates space for 4 texture paths (NO, SO, EA, WE)
+// Sets RGB values to -1 (meaning "not yet loaded")
+// Sets map pointer to NULL
+
 void	init_ceiling_and_floor(t_game *d, t_resources *c)
 {
 	d->ceiling_color = get_hex_from_rgb(c->ceil_rgb[0], c->ceil_rgb[1],
@@ -95,6 +101,9 @@ void	init_ceiling_and_floor(t_game *d, t_resources *c)
 	d->floor_color = get_hex_from_rgb(c->floor_rgb[0], c->floor_rgb[1],
 			c->floor_rgb[2]);
 }
+
+// Takes the three RGB values (0-255 each) and converts them to a single hex color:
+// RGB(100, 150, 200) → 0x006496C8
 
 void	init(t_game *d, t_resources *c)
 {
@@ -123,3 +132,14 @@ void	init(t_game *d, t_resources *c)
 	d->view_shift = 0;
 	d->texture = init_texture(d, c);
 }
+
+// This is the master initialization that calls everything else:
+// 1. Store references (map dimensions, assets)
+// 2. Initialize MLX (graphics library)
+// 3. Create window
+// 4. Find player position on map
+// 5. Set initial direction to North (dir_x = -1)
+// 6. Set camera plane (plane_y = 0.66 gives ~66° FOV)
+// 7. Rotate to actual starting direction
+// 8. Load colors
+// 9. Load textures
