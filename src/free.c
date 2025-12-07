@@ -22,6 +22,7 @@ void	clean_content(t_resources *c)
 	free(c->tex_path[1]);
 	free(c->tex_path[2]);
 	free(c->tex_path[3]);
+	free(c->tex_path);
 	tmp = c->rowlist;
 	while (tmp)
 	{
@@ -69,3 +70,15 @@ void	free_all(t_game *d)
 	mlx_destroy_window(d->mlx, d->win);
 	return ;
 }
+
+int	free_gnl(char *line, int fd, int ret_val)
+{
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (ret_val);
+}
+
+
