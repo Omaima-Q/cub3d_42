@@ -97,18 +97,15 @@ static int	parse_line(char *str, t_resources *c)
 	return (add_mapline(str, c, map_done));
 }
 
-static int	parse_elements(int fd, t_resources *content)
+static int	parse_elements(int fd, t_resources *resources)
 {
 	char	*str;
 
 	str = get_next_line(fd);
 	while (str)
 	{
-		if (parse_line(str, content) <= 0)
-		{
-			free(str);
-			return (0);
-		}
+		if (parse_line(str, resources) <= 0)
+			return (free_gnl(str, fd, 0));
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -116,13 +113,13 @@ static int	parse_elements(int fd, t_resources *content)
 	{
 		write(STDERR_FILENO, "Error\n", 6);
 		perror(NULL);
-		return (-1);
+		return (free_gnl(str, fd, -1));
 	}
-	if (list_to_matrix(content) <= 0)
-		return (0);
-	if (check_map(content) <= 0)
-		return (0);
-	return (1);
+	if (list_to_matrix(resources) <= 0)
+		return (free_gnl(str, fd, 0));
+	if (check_map(resources) <= 0)
+		return (free_gnl(str, fd, 0));
+	return (free_gnl(str, fd, 1));
 }
 
 int	parse(int argc, char *argv[], t_resources *content)
