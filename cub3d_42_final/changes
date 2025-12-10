@@ -1,0 +1,19 @@
+remove all the comments
+added clean_content in check_warnings()
+remove tex_num, view_shift 
+remove end in draw_floor_and_ceiling()
+
+removed from the struct:
+    int					view_shift;
+	int					tex_num;
+	int					map_width;
+	int					map_heigth;
+	int					screen_width;
+	int					screen_height;
+	int					**world_map;
+	int					floor_color;
+	int					ceiling_color;
+
+combined both rotate functions and send -rad for right rotations
+changed init_player_orientation(); to check for ESW only 
+
