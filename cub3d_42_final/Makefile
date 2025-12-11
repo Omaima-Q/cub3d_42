@@ -6,7 +6,7 @@
 #    By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/17 19:41:03 by omaimaqaroo       #+#    #+#              #
-#    Updated: 2025/12/10 19:30:37 by yalkhidi         ###   ########.fr        #
+#    Updated: 2025/12/11 14:15:46 by yalkhidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,10 +92,9 @@ re: fclean all
 # -Wno-deprecated: Disables warnings about deprecated functions
 # MLX uses some old macOS functions that trigger warnings. This silences them.
 
-# NAME = cub3d
+# NAME = cub3D
 
 # SRC_DIR = src
-
 # SRC_FILES = main.c	\
 # 			init.c	\
 # 			hooks.c	\
@@ -108,44 +107,41 @@ re: fclean all
 # 			free.c 		\
 # 			utils.c
 
-
+# SRCS = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
+# OBJS = $(SRCS:.c=.o)
 
 # INCLUDE_DIR = include
-# INCLUDE_FILES = cub3d.h
-
-# LIBFT_NAME = libft.a
 # LIBFT_DIR = libft
+# LIBFT = $(LIBFT_DIR)/libft.a
 
-# LIBMLX_NAME = libmlx.a
-# LIBMLX_DIR = minilibx-linux     # <-- IMPORTANT on Linux
+# MLX_DIR = minilibx-linux
+# MLX_LIB = $(MLX_DIR)/libmlx.a
 
 # CC = cc
+# CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+# LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
-# # Linux MLX linking
-# CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
-# LDFLAGS = -L$(LIBMLX_DIR) -lmlx -lXext -lX11 -lm -lz
-
-# # ***************************** RULES ******************************** #
-
-# $(NAME): $(addprefix $(LIBMLX_DIR)/,$(LIBMLX_NAME)) \
-#          $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) \
-#          $(addprefix $(SRC_DIR)/,$(SRC_FILES))
-# 	$(CC) $(CFLAGS) $(addprefix $(SRC_DIR)/,$(SRC_FILES)) \
-# 	$(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)) \
-# 	$(LDFLAGS) -o $(NAME)
-
-# $(addprefix $(LIBFT_DIR)/,$(LIBFT_NAME)):
-# 	make -C $(LIBFT_DIR)
-
-# $(addprefix $(LIBMLX_DIR)/,$(LIBMLX_NAME)):
-# 	make -C $(LIBMLX_DIR) CFLAGS=-Wno-deprecated
-
+# # ================== RULES ================== #
 
 # all: $(NAME)
 
+# $(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
+# 	$(CC) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+
+# %.o: %.c $(INCLUDE_DIR)/cub3d.h
+# 	$(CC) $(CFLAGS) -c $< -o $@
+
+
+# $(LIBFT):
+# 	make -C $(LIBFT_DIR)
+
+# $(MLX_LIB):
+# 	cd $(MLX_DIR) && ./configure && make
+
 # clean:
+# 	rm -f $(OBJS)
 # 	make clean -C $(LIBFT_DIR)
-# 	make clean -C $(LIBMLX_DIR)
+# 	make clean -C $(MLX_DIR)
 
 # fclean: clean
 # 	rm -f $(NAME)

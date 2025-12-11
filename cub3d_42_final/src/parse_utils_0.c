@@ -6,7 +6,7 @@
 /*   By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:38:58 by omaimaqaroo       #+#    #+#             */
-/*   Updated: 2025/12/09 11:03:23 by yalkhidi         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:17:57 by yalkhidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,9 @@ int	assign_rgb(int *rgb, char *str)
 	int	i;
 
 	if (rgb[0] != -1)
-	{
-		write(STDERR_FILENO, "Error\nElement duplicate\n", 24);
-		return (0);
-	}
-	i = 0;
-	while (i < 3)
+		return (write(STDERR_FILENO, "Error\nElement duplicate\n", 24), 0);
+	i = -1;
+	while (++i < 3)
 	{
 		while (ft_isspace(*str))
 			str++;
@@ -135,9 +132,14 @@ int	assign_rgb(int *rgb, char *str)
 			return (0);
 		while (ft_isdigit(*str) || ft_isspace(*str))
 			str++;
-		if (*str == ',')
+		if (i < 2 && *str != ',')
+			return (write(STDERR_FILENO, "Error\nWrong RGB value\n", 22), 0);
+		if (i < 2)
 			str++;
-		i++;
 	}
+	while (ft_isspace(*str))
+		str++;
+	if (*str && *str != '\n')
+		return (write(STDERR_FILENO, "Error\nWrong RGB value\n", 22), 0);
 	return (1);
 }

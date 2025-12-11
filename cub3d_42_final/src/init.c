@@ -6,7 +6,7 @@
 /*   By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:38:24 by omaimaqaroo       #+#    #+#             */
-/*   Updated: 2025/12/10 19:23:03 by yalkhidi         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:16:36 by yalkhidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_texture	**init_texture(t_game *data, t_resources *content)
 				&tex[i]->width, &tex[i]->height);
 		if (tex[i]->img == NULL)
 			error_msg("ERROR: tex[i]->img is NULL", data);
-		tex[i]->buf = mlx_get_data_addr(tex[i]->img, &tex[i]->pix_bits,
+		tex[i]->buf = mlx_get_game_addr(tex[i]->img, &tex[i]->pix_bits,
 				&tex[i]->l_bytes, &tex[i]->endi);
 	}
 	return (tex);
@@ -97,11 +97,11 @@ void	init(t_game *data, t_resources *content)
 	char	player;
 
 	data->assets = content;
-	data->texture = init_texture(data, content);
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
 		error_msg("ERROR: data->mlx is NULL\n", data);
 	data->win = mlx_new_window(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "CUB3D");
+	data->texture = init_texture(data, content);
 	if (data->win == NULL)
 		error_msg("ERROR: data->win is NULL\n", data);
 	data->img = NULL;

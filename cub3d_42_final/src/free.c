@@ -6,7 +6,7 @@
 /*   By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:37:44 by omaimaqaroo       #+#    #+#             */
-/*   Updated: 2025/12/10 19:20:38 by yalkhidi         ###   ########.fr       */
+/*   Updated: 2025/12/11 10:31:30 by yalkhidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clean_content(t_resources *content)
 		free(content->map);
 }
 
-static void	clean_textures(t_game *data)
+void	clean_textures(t_game *data)
 {
 	int	i;
 
@@ -69,7 +69,8 @@ void	free_all(t_game *data)
 {
 	if (data->assets)
 		clean_content(data->assets);
-	clean_textures(data);
+	if (data->texture)
+		clean_textures(data);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)

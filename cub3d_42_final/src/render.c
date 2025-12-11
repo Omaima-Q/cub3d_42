@@ -6,7 +6,7 @@
 /*   By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:39:50 by omaimaqaroo       #+#    #+#             */
-/*   Updated: 2025/12/10 18:49:07 by yalkhidi         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:16:17 by yalkhidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	render(t_game *data)
 	{
 		data->img = mlx_new_image(data->mlx, SCREEN_WIDTH,
 				SCREEN_HEIGHT);
-		data->buf = mlx_get_data_addr(data->img, &data->pix_bits,
+		data->buf = mlx_get_game_addr(data->img, &data->pix_bits,
 				&data->l_bytes, &data->endi);
 		data->buf_size = SCREEN_HEIGHT * data->l_bytes;
 	}

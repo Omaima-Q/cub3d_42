@@ -6,7 +6,7 @@
 /*   By: yalkhidi <yalkhidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 19:38:42 by omaimaqaroo       #+#    #+#             */
-/*   Updated: 2025/12/10 19:18:43 by yalkhidi         ###   ########.fr       */
+/*   Updated: 2025/12/11 09:50:49 by yalkhidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(int argc, char *argv[])
 	t_resources	content;
 
 	errno = 0;
+	ft_memset(&data, 0, sizeof(t_game));
+	ft_memset(&content, 0, sizeof(t_resources));
 	init_content(&content);
 	if (parse(argc, argv, &content) <= 0)
 		return (EXIT_FAILURE);
